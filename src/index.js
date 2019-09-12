@@ -1,48 +1,46 @@
-/**
- * es6 modules and imports
- */
-import sayHello from './hello';
-sayHello('World');
-
-/**
- * require style imports
- */
 const {getMovies, addMovie, editMovie, getMovie} = require('./api.js');
 
-const loaded = () => {
-  getMovies().then((movies) => {
-    console.log('Here are all the movies:');
-    movies.forEach(({title, rating, id}) => {
-      $('#load').hide();
-      $('#movie-con').append(`<p>id#${id} - ${title} - rating: ${rating}<button class='edit-btn' id="${id}">edit</button></p>`)
+//Function that gets movies from db and displays them
+const loadMovies = () => {
+    getMovies().then((movies) => {
+        movies.forEach(({title, rating, id}) => {
+            $('#load').hide();
+            $('#movie-con').append(`<p>id#${id} - ${title} - rating: ${rating}<button class='edit-btn' id="${id}">edit</button></p>`)
+        });
+        //Add listeners to the edit buttons
+        addBtnListeners();
+    }).catch((error) => {
+        alert('Oh no! Something went wrong.\nCheck the console for details.');
+        console.log(error);
     });
-  }).catch((error) => {
-    alert('Oh no! Something went wrong.\nCheck the console for details.');
-    console.log(error);
-  });
 };
-loaded();
+//Click listener for the submit button
 $('#submit').click(function () {
-  // e.preventDefault();
-  let newMovie = {
-    title: $('#movie-name').val(),
-    rating: $('#movie-rating').val()
-  };
-  addMovie(newMovie).then(() => {
-    $('#load').show();
-    $('#movie-con').html('');
-    loaded();
-  });
-  // console.log(newMovie);
+    //Create new movie object
+    let newMovie = {
+        title: $('#movie-name').val(),
+        rating: $('#movie-rating').val()
+    };
+    //Add the movie to the db
+    addMovie(newMovie).then(() => {
+        $('#load').show();
+        $('#movie-con').html('');
+        //Dynamically reload the page
+        loadMovies();
+    });
 });
-$('.edit-btn').click(function () {
-  let editid = $(this).attr('id');
-  console.log(editid);
-  getMovie(editid).then(movie =>{
-    $('#edit-movie').val(movie.title);
-    $('#edit-rating').val(movie.rating);
-  })
-});
+
+const addBtnListeners = function () {
+    $('.edit-btn').click(function () {
+        let editid = $(this).attr('id');
+        getMovie(editid).then(movie => {
+            $('#edit-movie').val(movie.title);
+            $('#edit-rating').val(movie.rating);
+        })
+    });
+};
+
+loadMovies();
 
 //When the form is submitted, the page should not reload / refresh,
 // instead, your javascript should make a POST request to
