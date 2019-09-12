@@ -1,36 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>My Application</title>
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-
-    <div id="container" class="container">
-        <div class="row">
-            <div id="movie-con" class="col"><h1 id="load">Loading...</h1></div>
-            <div class="col">
-                <h1>Add movie</h1>
-                <label for="movie-name">Name</label>
-                <input id="movie-name" type="text">
-                <label for="movie-rating">Rating</label>
-                <input id="movie-rating" type="text">
-                <button id="submit" type="submit">Submit</button>
-                <h1>edit</h1>
-                <label for="edit-movie">Edit Name</label>
-                <input id="edit-movie" type="text">
-                <label for="edit-rating">Edit Rating</label>
-                <input id="edit-rating" type="text">
-                <button id="edit-submit" type="submit">Submit</button>
-            </div>
+<!--Modal Content Divs-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modal-content">
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="./main.js"></script>
+</div>
+<!--Main Container-->
+<div id="container" class="container">
+    <div class="row">
+        <div class="col">
+            <div class="spinner-border text-primary" id="load" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div id="movie-con"></div>
+        </div>
+        <div class="col">
+            <h1>Add movie</h1>
+            <!-- Button to trigger modal for adding a movie -->
+            <button type="button" id="addMovieModal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Click here to Add a Movie
+            </button>
+            <!-- Edit a Movie Form-->
+            <h1>edit</h1>
+            <div class="form-group">
+                <label for="edit-movie">Edit Name</label>
+                <input id="edit-movie" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label for="edit-rating">Edit Rating</label>
+                <input id="edit-rating" class="form-control" type="text">
+            </div>
+            <button id="edit-submit" class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="./main.js"></script>
 
 </body>
 </html>
