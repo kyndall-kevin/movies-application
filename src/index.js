@@ -15,8 +15,8 @@ const loadMovies = () => {
                         <h6 class="card-subtitle mb-2 text-muted">Genre: ${genre}</h6>
                     </div>
                     <div class="card-footer d-flex">
-                        <button class=' btn edit-btn btn-primary mr-auto' data-toggle="modal" data-target="#exampleModal"  id="${id}edit">Edit</button>
-                        <button class=" btn dlt-btn btn-primary " id="${id}delete">Delete</button>
+                        <button class=' btn edit-btn btn-outline-info mr-auto' data-toggle="modal" data-target="#exampleModal"  id="${id}edit">Edit</button>
+                        <button class=" btn dlt-btn btn-outline-info" id="${id}delete">Delete</button>
                     </div>
                 </div>
                 </div>`)
@@ -78,8 +78,8 @@ const addEditBtnListeners = function () {
             '                </div>\n' +
             '            </div>\n' +
             '            <div class="modal-footer">\n' +
-            '                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
-            '                <button id="edit-submit" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>\n' +
+            '                <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>\n' +
+            '                <button id="edit-submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>\n' +
             '            </div>');
         addEditSubmitBtnListener();
         $('#exampleModal').modal('show');
@@ -159,8 +159,8 @@ $('#addMovieModal').click(function () {
         '                </div>\n' +
         '            </div>\n' +
         '            <div class="modal-footer">\n' +
-        '                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
-        '                <button id="submit" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>\n' +
+        '                <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>\n' +
+        '                <button id="submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>\n' +
         '            </div>');
     $('#exampleModal').modal('show');
     addSubmitBtnListener();
@@ -168,9 +168,3 @@ $('#addMovieModal').click(function () {
 
 loadMovies();
 
-
-//When the form is submitted, the page should not reload / refresh,
-// instead, your javascript should make a POST request to
-// /api/movies with the information the user put into the form
-
-//add getMovies in the function using jquery?

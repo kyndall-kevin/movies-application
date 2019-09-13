@@ -1,9 +1,8 @@
 body {
-	background-image: url("cinema.jpg");
+	background-image: url("img/cinema.jpg");
 }
-/*.container {*/
-/*    position: relative;*/
-/*    top: 50%;*/
-/*    transform: translateY(-100%);*/
-/*    text-align: center;*/
-/*}*/
+
+h1{
+	font-size: 5em;
+	text-shadow: 1px 1px 2px black, 0 0 35px yellow, 0 0 10px gold;
+}

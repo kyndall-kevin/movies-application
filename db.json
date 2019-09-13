@@ -1,46 +1,64 @@
 {
   "movies": [
     {
-      "title": "New movie 2",
-      "rating": "5",
-      "genre": "Thriller",
-      "id": 2
-    },
-    {
-      "title": "New movie",
-      "rating": "8",
-      "genre": "Horror",
+      "title": "The Other Guys",
+      "rating": "11",
+      "genre": "Comedy/Drama",
       "id": 1
     },
     {
-      "title": "New movie",
-      "rating": "8",
-      "genre": "Horror",
-      "id": 1
-    },
-    {
-      "title": "New movie 2",
-      "rating": "5",
-      "genre": "Thriller",
+      "title": "Step Brothers",
+      "rating": "7.5",
+      "genre": "Comedy",
       "id": 2
     },
     {
-      "title": "New movie",
+      "title": "Land of the Lost",
       "rating": "8",
-      "genre": "Horror",
-      "id": 1
-    },
-    {
-      "title": "New movie 2",
-      "rating": "5",
-      "genre": "Thriller",
-      "id": 2
-    },
-    {
-      "title": "",
-      "rating": "",
-      "genre": "",
+      "genre": "Comedy",
       "id": 3
+    },
+    {
+      "title": "Anchorman",
+      "rating": "13",
+      "genre": "Comedy",
+      "id": 4
+    },
+    {
+      "title": "Anchorman 2",
+      "rating": "14",
+      "genre": "Comedy",
+      "id": 5
+    },
+    {
+      "title": "Get Hard",
+      "rating": "7",
+      "genre": "Comedy",
+      "id": 6
+    },
+    {
+      "title": "Holmes & Watson",
+      "rating": "8",
+      "genre": "Historical Comedy",
+      "id": 7
+    },
+    {
+      "title": "Daddy's Home",
+      "rating": "8",
+      "genre": "Comedy",
+      "id": 8
+    },
+    {
+      "title": "Semi-Pro",
+      "rating": "11",
+      "genre": "Sports/Comedy",
+      "id": 9
+    },
+    {
+      "title": "Daddy's Home 2",
+      "rating": "8",
+      "genre": "Comedy",
+      "id": 10
     }
   ]
 }
