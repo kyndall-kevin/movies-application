@@ -10,10 +10,9 @@ module.exports = {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(function (r) {
-      console.log(r);
     })
-  },
+  }
+  ,
   editMovie: (id, data) => {
     return fetch(`/api/movies/${id}`, {
       method: 'PUT',

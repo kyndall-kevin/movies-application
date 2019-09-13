@@ -1,7 +1,6 @@
-html, body {
-    height: 100%;
+body {
+	background-image: url("cinema.jpg");
 }
-
 /*.container {*/
 /*    position: relative;*/
 /*    top: 50%;*/

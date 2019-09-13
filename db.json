@@ -1,34 +1,46 @@
 {
   "movies": [
     {
-      "title": "dvbdjkv",
-      "rating": "2",
-      "id": 1
-    },
-    {
-      "title": "Air Bud",
-      "rating": "1.5",
+      "title": "New movie 2",
+      "rating": "5",
+      "genre": "Thriller",
       "id": 2
     },
     {
-      "title": "Air Bud puppies",
-      "rating": "9.5",
-      "id": 3
+      "title": "New movie",
+      "rating": "8",
+      "genre": "Horror",
+      "id": 1
     },
     {
-      "title": "Air Bud puppies",
-      "rating": "9.5",
-      "id": 4
+      "title": "New movie",
+      "rating": "8",
+      "genre": "Horror",
+      "id": 1
     },
     {
-      "title": "home movie",
+      "title": "New movie 2",
       "rating": "5",
-      "id": 5
+      "genre": "Thriller",
+      "id": 2
     },
     {
-      "title": "Elf",
-      "rating": "9",
-      "id": 6
+      "title": "New movie",
+      "rating": "8",
+      "genre": "Horror",
+      "id": 1
+    },
+    {
+      "title": "New movie 2",
+      "rating": "5",
+      "genre": "Thriller",
+      "id": 2
+    },
+    {
+      "title": "",
+      "rating": "",
+      "genre": "",
+      "id": 3
     }
   ]
 }
