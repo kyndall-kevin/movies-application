@@ -26,7 +26,32 @@
 				</button>
 			</div>
 		</header>
-		<div class="container text-center mt-5">
+		<div class="container text-center">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-info active">
+					<input autocomplete="off" checked id="sort-none" name="sorting" type="radio"> None
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-title-ascending" name="sorting" type="radio"> Title A-Z
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-title-descending" name="sorting" type="radio"> Title Z-A
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-rating-ascending" name="sorting" type="radio"> Rating Ascending
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-rating-descending" name="sorting" type="radio"> Rating Descending
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-genre-ascending" name="sorting" type="radio"> Genre A-Z
+				</label>
+				<label class="btn btn-info">
+					<input autocomplete="off" id="sort-genre-ascending" name="sorting" type="radio"> Genre Z-A
+				</label>
+			</div>
+		</div>
+		<div class="container text-center mt-3">
 			<div class="row align-items-center align-middle h-100" id="load">
 				<div class="col">
 					<img alt="loading-movies" src="img/movie-countdown-gif.gif">

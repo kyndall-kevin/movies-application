@@ -3,6 +3,9 @@ const {getMovies, addMovie, editMovie, getMovie, deleteMovie} = require('./api.j
 //Function that gets movies from db and displays them
 const loadMovies = () => {
     getMovies().then((movies) => {
+
+        movies = sortMovies(movies);
+
         movies.forEach(({title, rating, id, genre}) => {
             //Hide the loading icon
             $('#load').hide();
@@ -29,6 +32,38 @@ const loadMovies = () => {
         alert('Oh no! Something went wrong.\nCheck the console for details.');
         console.log(error);
     });
+};
+
+//Listener for the sorting buttons on change
+$('input[name=sorting]').on('change', function () {
+    //Show the loading animation
+    $('#load').show();
+    //Clear the displayed movies
+    $('#movie-con').html('');
+    //Reload
+    loadMovies();
+});
+
+//Sorts movies by what is selected in the radio buttons
+const sortMovies = function (movies) {
+    let radioValue = $("input[name='sorting']:checked").parent('label').text().trim();
+
+    if (radioValue === "None")
+        return movies.sort((a, b) => a.id - b.id);
+    else if (radioValue === "Title A-Z")
+        return movies.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1);
+    else if (radioValue === "Title Z-A")
+        return movies.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? -1 : 1);
+    else if (radioValue === "Genre A-Z")
+        return movies.sort((a, b) => (a.genre.toLowerCase() > b.genre.toLowerCase()) ? 1 : -1);
+    else if (radioValue === "Genre Z-A")
+        return movies.sort((a, b) => (a.genre.toLowerCase() > b.genre.toLowerCase()) ? -1 : 1);
+    else if (radioValue === "Rating Ascending")
+        return movies.sort((a, b) => a.rating - b.rating);
+    else if (radioValue === "Rating Descending")
+        return movies.sort((a, b) => b.rating - a.rating);
+    else
+        return movies;
 };
 
 //Click listener for the submit button
@@ -81,7 +116,7 @@ const addEditBtnListeners = function () {
                                     <div class="modal-footer">
                                         <button id="edit-submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>
                                     </div>`);
-            addEditSubmitBtnListener();
+            addEditSubmitBtnListener(parseInt($(this).attr('id')));
             //Prepopulate the form
             $('#edit-movie').val(movie.title);
             $('#edit-rating').val(movie.rating);
@@ -112,7 +147,7 @@ const addDeleteBtnListener = function () {
 };
 
 // ------------------------------------------EDIT MOVIE SUBMIT BUTTON
-const addEditSubmitBtnListener = function () {
+const addEditSubmitBtnListener = function (id) {
     $('#edit-submit').click(function () {
         //Get the new movie information from the input boxes
         let changedMovie = {
@@ -125,7 +160,7 @@ const addEditSubmitBtnListener = function () {
         $('#edit-rating').val('');
         $('#edit-genre').val('');
         //Edit the movie in the db
-        editMovie(movieEditId, changedMovie).then(() => {
+        editMovie(id, changedMovie).then(() => {
             //Show the loading icon
             $('#load').show();
             //Clear the page
