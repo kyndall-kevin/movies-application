@@ -4,24 +4,25 @@ const {getMovies, addMovie, editMovie, getMovie, deleteMovie} = require('./api.j
 const loadMovies = () => {
     getMovies().then((movies) => {
         movies.forEach(({title, rating, id, genre}) => {
+            //Hide the loading icon
             $('#load').hide();
+            //Add a card with the movie information in it
             $('#movie-con').append(`
                 <div class="col-4 mb-3">
-                
-                <div class="card">
-                    <h5 class="card-header">${title}</h5>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Rating: ${rating}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">Genre: ${genre}</h6>
+                    <div class="card">
+                        <h5 class="card-header">${title}</h5>
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Rating: ${rating}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Genre: ${genre}</h6>
+                        </div>
+                        <div class="card-footer d-flex">
+                            <button class=' btn edit-btn btn-outline-info mr-auto' data-toggle="modal"  id="${id}edit">Edit</button>
+                            <button class=" btn dlt-btn btn-outline-info" id="${id}delete">Delete</button>
+                        </div>
                     </div>
-                    <div class="card-footer d-flex">
-                        <button class=' btn edit-btn btn-outline-info mr-auto' data-toggle="modal" data-target="#exampleModal"  id="${id}edit">Edit</button>
-                        <button class=" btn dlt-btn btn-outline-info" id="${id}delete">Delete</button>
-                    </div>
-                </div>
                 </div>`)
         });
-        //Add listeners to the edit buttons
+        //Add listeners to the edit and delete buttons
         addEditBtnListeners();
         addDeleteBtnListener();
     }).catch((error) => {
@@ -29,6 +30,7 @@ const loadMovies = () => {
         console.log(error);
     });
 };
+
 //Click listener for the submit button
 const addSubmitBtnListener = function () {
     $('#submit').click(function () {
@@ -47,45 +49,45 @@ const addSubmitBtnListener = function () {
         });
     });
 };
+
 // ---------------------------------------------EDIT MOVIE BUTTON
-
-let movieEditId = 0;
-
 const addEditBtnListeners = function () {
     $('.edit-btn').click(function () {
-        //Get the movie id to edit from the edit button id
-        movieEditId = parseInt($(this).attr('id'));
-        //Disable the button
+        //Disable the edit button
         $(this).attr('disabled', true);
-        $('#modal-content').html('<div class="modal-header">\n' +
-            '                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>\n' +
-            '                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
-            '                    <span aria-hidden="true">&times;</span>\n' +
-            '                </button>\n' +
-            '            </div>\n' +
-            '            <div class="modal-body">\n' +
-            '                <div class="form-group">\n' +
-            '                    <label for="edit-movie">Name</label>\n' +
-            '                    <input id="edit-movie" class="form-control" type="text">\n' +
-            '                </div>\n' +
-            '                <div class="form-group">\n' +
-            '                    <label for="edit-rating">Rating</label>\n' +
-            '                    <input id="edit-rating" class="form-control" type="text">\n' +
-            '                </div>\n' +
-            '                <div class="form-group">\n' +
-            '                    <label for="edit-genre">Genre</label>\n' +
-            '                    <input id="edit-genre" class="form-control" type="text">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '            <div class="modal-footer">\n' +
-            '                <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>\n' +
-            '                <button id="edit-submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>\n' +
-            '            </div>');
-        addEditSubmitBtnListener();
-        $('#exampleModal').modal('show');
-        getMovie(movieEditId).then(movie => {
+        //Get the movie information from the db
+        getMovie(parseInt($(this).attr('id'))).then(movie => {
+            //Populate the modal with the edit form
+            $('#modal-content').html(`<div class="modal-header">
+                                        <h5 class="modal-title" >Edit movie</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="edit-movie">Name</label>
+                                            <input id="edit-movie" class="form-control" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-rating">Rating</label>
+                                            <input id="edit-rating" class="form-control" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-genre">Genre</label>
+                                            <input id="edit-genre" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="edit-submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>
+                                    </div>`);
+            addEditSubmitBtnListener();
+            //Prepopulate the form
             $('#edit-movie').val(movie.title);
             $('#edit-rating').val(movie.rating);
+            $('#edit-genre').val(movie.genre);
+            //Display the modal after everything is in
+            $('#modal').modal('show');
         });
         //Re-enable the button
         $(this).attr('disabled', false);
@@ -94,15 +96,12 @@ const addEditBtnListeners = function () {
 };
 
 // --------------------------------------------------DELETE MOVIE BUTTON
-
 const addDeleteBtnListener = function () {
     $('.dlt-btn').click(function () {
-        //Get the id of the movie being clicked from the button id
-        let movieDeleteId = parseInt($(this).attr('id'));
         //Bonus to make the button disabled
         $(this).attr('disabled', true);
-        //Delete the move from the db
-        deleteMovie(movieDeleteId);
+        //Delete the move from the db using the id from the button
+        deleteMovie(parseInt($(this).attr('id')));
         //Show the loading animation
         $('#load').show();
         //Clear the displayed movies
@@ -113,7 +112,6 @@ const addDeleteBtnListener = function () {
 };
 
 // ------------------------------------------EDIT MOVIE SUBMIT BUTTON
-
 const addEditSubmitBtnListener = function () {
     $('#edit-submit').click(function () {
         //Get the new movie information from the input boxes
@@ -128,43 +126,46 @@ const addEditSubmitBtnListener = function () {
         $('#edit-genre').val('');
         //Edit the movie in the db
         editMovie(movieEditId, changedMovie).then(() => {
+            //Show the loading icon
             $('#load').show();
+            //Clear the page
             $('#movie-con').html('');
-            //Dynamically reload the page
+            //Reload the page
             loadMovies();
         })
     });
 };
-// ------------------------------------------------EDIT MOVIE MODAL
-
+// ------------------------------------------------ADD MOVIE MODAL
 $('#addMovieModal').click(function () {
-    $('#modal-content').html('<div class="modal-header">\n' +
-        '                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>\n' +
-        '                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
-        '                    <span aria-hidden="true">&times;</span>\n' +
-        '                </button>\n' +
-        '            </div>\n' +
-        '            <div class="modal-body">\n' +
-        '                <div class="form-group">\n' +
-        '                    <label for="movie-name">Name</label>\n' +
-        '                    <input id="movie-name" class="form-control" type="text">\n' +
-        '                </div>\n' +
-        '                <div class="form-group">\n' +
-        '                    <label for="movie-rating">Rating</label>\n' +
-        '                    <input id="movie-rating" class="form-control" type="text">\n' +
-        '                </div>\n' +
-        '                <div class="form-group">\n' +
-        '                    <label for="movie-genre">Genre</label>\n' +
-        '                    <input id="movie-genre" class="form-control" type="text">\n' +
-        '                </div>\n' +
-        '            </div>\n' +
-        '            <div class="modal-footer">\n' +
-        '                <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>\n' +
-        '                <button id="submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Save changes</button>\n' +
-        '            </div>');
-    $('#exampleModal').modal('show');
+    //Populate the modal with add movie form
+    $('#modal-content').html(`<div class="modal-header">
+                        <h5 class="modal-title">Add a movie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="movie-name">Name</label>
+                            <input id="movie-name" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="movie-rating">Rating</label>
+                            <input id="movie-rating" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="movie-genre">Genre</label>
+                            <input id="movie-genre" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="submit" type="button" class="btn btn-outline-info" data-dismiss="modal">Submit</button>
+                    </div>`);
+    //Display the modal
+    $('#modal').modal('show');
+    //Add listener to the submit button
     addSubmitBtnListener();
 });
 
+//Initial call to populate the page
 loadMovies();
-

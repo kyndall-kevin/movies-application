@@ -6,11 +6,11 @@
 		<link href="/style.css" rel="stylesheet"/>
 		<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 			  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+		<link href="style.css" rel="stylesheet">
 	</head>
 	<body class="vh-100">
 		<!--Modal Content Divs-->
-		<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+		<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal" role="dialog" tabindex="-1">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content" id="modal-content">
 				</div>
@@ -19,7 +19,7 @@
 		<!--Main Container-->
 		<header class="jumbotron bg-transparent">
 			<div class="container text-center">
-				<h1 class="text-white">Add Movie</h1>
+				<h1 class="text-white">Movie Application</h1>
 				<!-- Button to trigger modal for adding a movie -->
 				<button class="btn btn-info" id="addMovieModal" type="button">
 					Click here to Add a Movie
@@ -29,7 +29,7 @@
 		<div class="container text-center mt-5">
 			<div class="row align-items-center align-middle h-100" id="load">
 				<div class="col">
-                    <img src="img/movie-countdown-gif.gif" alt="loading-movies">
+					<img alt="loading-movies" src="img/movie-countdown-gif.gif">
 				</div>
 			</div>
 			<div class="text-left">
