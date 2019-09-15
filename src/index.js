@@ -2,9 +2,16 @@ const {getMovies, addMovie, editMovie, getMovie, deleteMovie} = require('./api.j
 
 //Function that gets movies from db and displays them
 const loadMovies = () => {
+    //Show the loading animation
+    $('#load').show();
+    //Clear the displayed movies
+    $('#movie-con').html('');
+
     getMovies().then((movies) => {
 
         movies = sortMovies(movies);
+        if ($('#search').val().length > 0)
+            movies = searchMovies(movies);
 
         movies.forEach(({title, rating, id, genre}) => {
             //Hide the loading icon
@@ -34,33 +41,53 @@ const loadMovies = () => {
     });
 };
 
-//Listener for the sorting buttons on change
-$('input[name=sorting]').on('change', function () {
-    //Show the loading animation
-    $('#load').show();
-    //Clear the displayed movies
-    $('#movie-con').html('');
+//Button to clear the search box
+$('#clearBtn').click(function () {
+    if ($('#search').val().length > 0) {
+        $('#search').val('');
+        //Reload
+        loadMovies();
+    }
+});
+
+//Listener for search input
+$('#search').on('change', function () {
     //Reload
     loadMovies();
 });
 
-//Sorts movies by what is selected in the radio buttons
-const sortMovies = function (movies) {
-    let radioValue = $("input[name='sorting']:checked").parent('label').text().trim();
+//Filters movies based on the search terms
+const searchMovies = function (movies) {
+    let searchTerm = $('#search').val();
 
-    if (radioValue === "None")
+    return movies.filter(function (movie) {
+        return movie.title.toLowerCase().indexOf(searchTerm) !== -1
+    });
+};
+
+//Listener for the sorting buttons on change
+$('select[id=sorting]').on('change', function () {
+    //Reload
+    loadMovies();
+});
+
+//Sorts movies by what is selected in the select
+const sortMovies = function (movies) {
+    let sortBy = $("option:checked").val();
+
+    if (sortBy === "sort-none")
         return movies.sort((a, b) => a.id - b.id);
-    else if (radioValue === "Title A-Z")
+    else if (sortBy === "sort-title-ascending")
         return movies.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1);
-    else if (radioValue === "Title Z-A")
+    else if (sortBy === "sort-title-descending")
         return movies.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? -1 : 1);
-    else if (radioValue === "Genre A-Z")
+    else if (sortBy === "sort-genre-ascending")
         return movies.sort((a, b) => (a.genre.toLowerCase() > b.genre.toLowerCase()) ? 1 : -1);
-    else if (radioValue === "Genre Z-A")
+    else if (sortBy === "sort-genre-descending")
         return movies.sort((a, b) => (a.genre.toLowerCase() > b.genre.toLowerCase()) ? -1 : 1);
-    else if (radioValue === "Rating Ascending")
+    else if (sortBy === "sort-rating-ascending")
         return movies.sort((a, b) => a.rating - b.rating);
-    else if (radioValue === "Rating Descending")
+    else if (sortBy === "sort-rating-descending")
         return movies.sort((a, b) => b.rating - a.rating);
     else
         return movies;
@@ -77,8 +104,6 @@ const addSubmitBtnListener = function () {
         };
         //Add the movie to the db
         addMovie(newMovie).then(() => {
-            $('#load').show();
-            $('#movie-con').html('');
             //Dynamically reload the page
             loadMovies();
         });
@@ -137,10 +162,6 @@ const addDeleteBtnListener = function () {
         $(this).attr('disabled', true);
         //Delete the move from the db using the id from the button
         deleteMovie(parseInt($(this).attr('id')));
-        //Show the loading animation
-        $('#load').show();
-        //Clear the displayed movies
-        $('#movie-con').html('');
         //Load the current movie db
         loadMovies();
     })
@@ -161,10 +182,6 @@ const addEditSubmitBtnListener = function (id) {
         $('#edit-genre').val('');
         //Edit the movie in the db
         editMovie(id, changedMovie).then(() => {
-            //Show the loading icon
-            $('#load').show();
-            //Clear the page
-            $('#movie-con').html('');
             //Reload the page
             loadMovies();
         })

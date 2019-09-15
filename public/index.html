@@ -19,36 +19,25 @@
 		<!--Main Container-->
 		<header class="jumbotron bg-transparent">
 			<div class="container text-center">
-				<h1 class="text-white">Movie Application</h1>
-				<!-- Button to trigger modal for adding a movie -->
-				<button class="btn btn-info" id="addMovieModal" type="button">
-					Click here to Add a Movie
-				</button>
+				<h1 class="text-white">My Movie List</h1>
 			</div>
 		</header>
 		<div class="container text-center">
-			<div class="btn-group btn-group-toggle" data-toggle="buttons">
-				<label class="btn btn-info active">
-					<input autocomplete="off" checked id="sort-none" name="sorting" type="radio"> None
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-title-ascending" name="sorting" type="radio"> Title A-Z
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-title-descending" name="sorting" type="radio"> Title Z-A
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-rating-ascending" name="sorting" type="radio"> Rating Ascending
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-rating-descending" name="sorting" type="radio"> Rating Descending
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-genre-ascending" name="sorting" type="radio"> Genre A-Z
-				</label>
-				<label class="btn btn-info">
-					<input autocomplete="off" id="sort-genre-ascending" name="sorting" type="radio"> Genre Z-A
-				</label>
+			<div class="row">
+				<div class="col-3 form-row">
+					<input class="form-control col-9" id="search" placeholder="Search" type="text">
+					<button class="btn btn-info col-3" id="clearBtn">Clear</button>
+				</div>
+				<button class="btn btn-info offset-2 col-2" id="addMovieModal" type="button">Add a Movie</button>
+				<select class="custom-select offset-2 col-3" data-toggle="buttons" id="sorting">
+					<option selected value="sort-none"> Default sort</option>
+					<option value="sort-title-ascending"> Title A-Z</option>
+					<option value="sort-title-descending"> Title Z-A</option>
+					<option value="sort-rating-ascending"> Rating Ascending</option>
+					<option value="sort-rating-descending"> Rating Descending</option>
+					<option value="sort-genre-ascending"> Genre A-Z</option>
+					<option value="sort-genre-descending"> Genre Z-A</option>
+				</select>
 			</div>
 		</div>
 		<div class="container text-center mt-3">
