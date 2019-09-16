@@ -6,11 +6,11 @@
 		<link href="/style.css" rel="stylesheet"/>
 		<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 			  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+		<link href="style.css" rel="stylesheet">
 	</head>
 	<body class="vh-100">
 		<!--Modal Content Divs-->
-		<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+		<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal" role="dialog" tabindex="-1">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content" id="modal-content">
 				</div>
@@ -19,17 +19,31 @@
 		<!--Main Container-->
 		<header class="jumbotron bg-transparent">
 			<div class="container text-center">
-				<h1 class="text-white">Add Movie</h1>
-				<!-- Button to trigger modal for adding a movie -->
-				<button class="btn btn-info" id="addMovieModal" type="button">
-					Click here to Add a Movie
-				</button>
+				<h1 class="text-white">My Movie List</h1>
 			</div>
 		</header>
-		<div class="container text-center mt-5">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-3 form-row">
+					<input class="form-control col-9" id="search" placeholder="Search" type="text">
+					<button class="btn btn-info col-3" id="clearBtn">Clear</button>
+				</div>
+				<button class="btn btn-info offset-2 col-2" id="addMovieModal" type="button">Add a Movie</button>
+				<select class="custom-select offset-2 col-3" data-toggle="buttons" id="sorting">
+					<option selected value="sort-none"> Default sort</option>
+					<option value="sort-title-ascending"> Title A-Z</option>
+					<option value="sort-title-descending"> Title Z-A</option>
+					<option value="sort-rating-ascending"> Rating Ascending</option>
+					<option value="sort-rating-descending"> Rating Descending</option>
+					<option value="sort-genre-ascending"> Genre A-Z</option>
+					<option value="sort-genre-descending"> Genre Z-A</option>
+				</select>
+			</div>
+		</div>
+		<div class="container text-center mt-3">
 			<div class="row align-items-center align-middle h-100" id="load">
 				<div class="col">
-                    <img src="img/movie-countdown-gif.gif" alt="loading-movies">
+					<img alt="loading-movies" src="img/movie-countdown-gif.gif">
 				</div>
 			</div>
 			<div class="text-left">
